@@ -1,6 +1,8 @@
-import firebase from "firebase";
+// import firebase from "firebase";
+import { initializeApp, getApps } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 
-const config = {
+const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
   authDomain: import.meta.env.VITE_AUTH_DOMAIN,
   projectId: import.meta.env.VITE_PROJECT_ID,
@@ -10,8 +12,15 @@ const config = {
   measurementId: import.meta.env.VITE_MEASUREMENT_ID,
 };
 
-if (!firebase.apps.length) {
-  firebase.initialiseApp(config);
+let app;
+if (!getApps().length) {
+  app = initializeApp(firebaseConfig);
+
+  if (firebaseConfig.measurementId) {
+    getAnalytics(app);
+  }
+} else {
+  app = getApps()[0];
 }
 
-export default firebase;
+export default app;

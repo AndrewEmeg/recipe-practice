@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <div className="title-row">
-        <h1 className="title">Firebase Recipes</h1>
+        <h1 className="title">Fire-Lol-base Recipes</h1>
         <LoginForm existingUser={user} />
       </div>
     </div>
